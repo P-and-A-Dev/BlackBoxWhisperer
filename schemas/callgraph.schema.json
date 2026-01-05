@@ -1,0 +1,63 @@
+{
+	"type": "object",
+	"required": [
+		"nodes",
+		"edges"
+	],
+	"properties": {
+		"nodes": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"type",
+					"label"
+				],
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"program",
+							"section",
+							"paragraph"
+						]
+					},
+					"label": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"edges": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"from",
+					"to",
+					"relation"
+				],
+				"properties": {
+					"from": {
+						"type": "string"
+					},
+					"to": {
+						"type": "string"
+					},
+					"relation": {
+						"type": "string",
+						"enum": [
+							"CALL",
+							"PERFORM",
+							"COPY"
+						]
+					}
+				}
+			}
+		}
+	}
+}
