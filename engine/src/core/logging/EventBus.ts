@@ -1,9 +1,20 @@
-import type { EngineEvent } from "./events.js";
-
-export type EventHandler = (event: EngineEvent) => void;
+export interface EngineEvent {
+	type: string;
+	[key: string]: unknown;
+}
 
 export interface EventBus {
-	publish(event: EngineEvent): void;
+	emit(event: EngineEvent): void;
+}
 
-	subscribe(handler: EventHandler): () => void;
+export class InMemoryEventBus implements EventBus {
+	private events: EngineEvent[] = [];
+
+	emit(event: EngineEvent): void {
+		this.events.push(event);
+	}
+
+	list(): EngineEvent[] {
+		return [...this.events];
+	}
 }

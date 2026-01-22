@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "tsx src/cli/main.ts",
     "build": "rimraf dist && tsc",
-    "dev": "ts-node src/cli/main.ts",
     "start": "node dist/cli/main.js"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "@types/node": "^25.0.3",
     "rimraf": "^6.1.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
