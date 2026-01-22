@@ -4,7 +4,6 @@ import { CallGraphStage } from "./stages/callgraph.stage.js";
 import { MetricsStage } from "./stages/metrics.stage.js";
 import { RisksStage } from "./stages/risks.stage.js";
 import { ReportStage } from "./stages/report.stage.js";
-import { HelloStage } from "./stages/hello.stage.js";
 
 export const CobolAdapter: Adapter = {
     id: "cobol",
