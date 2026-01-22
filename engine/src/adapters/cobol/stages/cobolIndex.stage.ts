@@ -49,6 +49,7 @@ function indexOneFile(fileRef: InputFileRef, content: string): CobolProgramIndex
     for (let i = 0; i < lines.length; i++) {
         const lineNo = i + 1;
         const raw = lines[i];
+        if (raw === undefined) continue;
 
         const l = normalizeLine(raw);
         if (!l) continue;
@@ -72,14 +73,19 @@ function indexOneFile(fileRef: InputFileRef, content: string): CobolProgramIndex
     performs.sort((a, b) => a.line - b.line || a.raw.localeCompare(b.raw));
     copies.sort((a, b) => a.line - b.line || a.raw.localeCompare(b.raw));
 
-    return {
+    const base: CobolProgramIndex = {
         file: fileRef.path,
         sha256: fileRef.sha256,
-        programId,
         calls,
         performs,
         copies
     };
+
+    if (programId !== undefined) {
+        return { ...base, programId };
+    }
+
+    return base;
 }
 
 function splitLines(s: string): string[] {
