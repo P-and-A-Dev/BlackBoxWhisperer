@@ -13,7 +13,7 @@ export const DiscoverFilesStage: Stage = {
     async run(ctx) {
         const rootAbs = path.resolve(ctx.config.projectRoot);
 
-        // Guardrails simples (constants déterministes)
+        // Simples guardrails (deterministes constants)
         const maxFiles = 50_000;
         const maxFileSizeBytes = 10 * 1024 * 1024;
 
