@@ -6,6 +6,7 @@ import { InMemoryEventBus } from "../core/logging/EventBus.js";
 import { ArtifactStoreFs } from "../core/artifacts/ArtifactStoreFs.js";
 import type { ArtifactManifest } from "../core/artifacts/ArtifactManifest.js";
 import { HelloStage } from "../adapters/cobol/stages/hello.stage.js";
+import type { RunConfig } from "../core/pipeline/RunConfig.js";
 
 function runId(): string {
     return "run-" + new Date().toISOString().replace(/[:.]/g, "-");
@@ -35,15 +36,17 @@ async function main(): Promise<void> {
     const artifacts = new ArtifactStoreFs(outDir, manifest);
     const events = new InMemoryEventBus();
 
+    const config: RunConfig = {
+        projectRoot,
+        outDir,
+        adapter: "cobol",
+        mode: "cli",
+        strict: true
+    };
+
     const ctx = {
         runId: run,
-        config: {
-            projectRoot,
-            outDir,
-            adapter: "cobol",
-            mode: "cli",
-            strict: true
-        },
+        config: config,
         inputs: { files: [] },
         scratch: {},
         artifacts,
