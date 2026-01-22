@@ -91,7 +91,7 @@ function detectKind(filePathAbs: string): InputKind {
     const ext = path.extname(filePathAbs).toLowerCase();
 
     // COBOL common extensions vary a lot, keep heuristics conservative
-    if (ext === ".cbl" || ext === ".cob" || ext === ".cobol") return "cobol";
+    if (ext === ".cbl" || ext === ".cob" || ext === ".cobol" || ext === ".pco") return "cobol";
     if (ext === ".cpy" || ext === ".copy" || ext === ".copybook") return "copybook";
     if (ext === ".jcl") return "jcl";
 

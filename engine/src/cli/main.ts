@@ -10,6 +10,7 @@ import type { RunConfig } from "../core/pipeline/RunConfig.js";
 import { DiscoverFilesStage } from "../adapters/cobol/stages/discoverFiles.stage.js";
 import type { PipelineContext } from "../core/pipeline/Context.js";
 import { CobolIndexStage } from "../adapters/cobol/stages/cobolIndex.stage.js";
+import { CallGraphStage } from "../adapters/cobol/stages/callgraph.stage.js";
 
 function runId(): string {
     return "run-" + new Date().toISOString().replace(/[:.]/g, "-");
@@ -58,7 +59,7 @@ async function main(): Promise<void> {
 
 
     const pipeline = new PipelineImpl();
-    await pipeline.run([DiscoverFilesStage, CobolIndexStage, HelloStage], ctx);
+    await pipeline.run([DiscoverFilesStage, CobolIndexStage, CallGraphStage, HelloStage], ctx);
 
     manifest.inputs.files = ctx.inputs.files.map((f) => ({
         path: f.path,
