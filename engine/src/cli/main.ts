@@ -13,6 +13,7 @@ import { CobolIndexStage } from "../adapters/cobol/stages/cobolIndex.stage.js";
 import { CallGraphStage } from "../adapters/cobol/stages/callgraph.stage.js";
 import { MetricsStage } from "../adapters/cobol/stages/metrics.stage.js";
 import { RisksStage } from "../adapters/cobol/stages/risks.stage.js";
+import { ReportStage } from "../adapters/cobol/stages/report.stage.js";
 
 function runId(): string {
     return "run-" + new Date().toISOString().replace(/[:.]/g, "-");
@@ -67,7 +68,7 @@ async function main(): Promise<void> {
         CallGraphStage,
         MetricsStage,
         RisksStage,
-        HelloStage
+        ReportStage
     ], ctx);
 
     manifest.inputs.files = ctx.inputs.files.map((f) => ({

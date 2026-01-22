@@ -213,7 +213,7 @@ This project uses a **clean, strict Git flow**.
 
 ## Commit Message Convention
 
-This project follows a **Conventional Commits–inspired format**.
+This project follows a **Conventional Commits - inspired format**.
 
 ### Format
 

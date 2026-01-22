@@ -1,4 +1,4 @@
-# Black Box Whisperer – Analysis Report
+# Black Box Whisperer - Analysis Report
 
 ## Run Information
 
@@ -31,7 +31,7 @@ The call graph shows a strong coupling between the main program and shared utili
 
 ## Identified Risks
 
-### 🔴 RISK-001 – Unvalidated monetary amount before database update
+### 🔴 RISK-001 - Unvalidated monetary amount before database update
 - **Severity**: High
 - **Confidence**: 82%
 
@@ -44,7 +44,7 @@ Potential impact:
 
 ---
 
-### 🟠 RISK-002 – Synchronous logging in critical execution path
+### 🟠 RISK-002 - Synchronous logging in critical execution path
 - **Severity**: Medium
 - **Confidence**: 67%
 
