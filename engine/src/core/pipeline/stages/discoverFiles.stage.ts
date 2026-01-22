@@ -2,8 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
-import type { Stage } from "../../../core/pipeline/Stage.js";
-import type { InputKind, InputFileRef } from "../../../core/pipeline/Context.js";
+import type { Stage } from "../Stage.js";
+import type { InputKind, InputFileRef } from "../Context.js";
 
 export const DiscoverFilesStage: Stage = {
     id: "discover.files",
@@ -13,9 +13,9 @@ export const DiscoverFilesStage: Stage = {
     async run(ctx) {
         const rootAbs = path.resolve(ctx.config.projectRoot);
 
-        // Simples guardrails (deterministes constants)
-        const maxFiles = 50_000;
-        const maxFileSizeBytes = 10 * 1024 * 1024;
+        // Simple guardrails
+        const maxFiles = ctx.config.limits?.maxFiles ?? 50_000;
+        const maxFileSizeBytes = ctx.config.limits?.maxFileSizeBytes ?? 10 * 1024 * 1024;
 
         const filesAbs: string[] = [];
         await walkDir(rootAbs, filesAbs, maxFiles);
@@ -27,10 +27,10 @@ export const DiscoverFilesStage: Stage = {
             if (st.size > maxFileSizeBytes) continue;
 
             const rel = toPosix(path.relative(rootAbs, absPath));
-            const kind = detectKind(absPath);
+            const kind = detectKind(absPath, ctx.config.kindMap);
             const sha256 = await sha256File(absPath);
 
-            refs.push({ path: rel, sha256, size: st.size, kind });
+            refs.push({ path: rel, sha256, size: st.size, kind: kind as InputKind });
         }
 
         refs.sort((a, b) => a.path.localeCompare(b.path));
@@ -87,14 +87,14 @@ function toPosix(p: string): string {
     return p.split(path.sep).join("/");
 }
 
-function detectKind(filePathAbs: string): InputKind {
+function detectKind(filePathAbs: string, kindMap?: Record<string, string>): string {
     const ext = path.extname(filePathAbs).toLowerCase();
 
-    // COBOL common extensions vary a lot, keep heuristics conservative
-    if (ext === ".cbl" || ext === ".cob" || ext === ".cobol" || ext === ".pco") return "cobol";
-    if (ext === ".cpy" || ext === ".copy" || ext === ".copybook") return "copybook";
-    if (ext === ".jcl") return "jcl";
+    if (kindMap && kindMap[ext]) {
+        return kindMap[ext];
+    }
 
+    // Default cleanup: unknown
     return "unknown";
 }
 

@@ -91,7 +91,7 @@ function renderReport(
             lines.push(`${r.description}`);
             if (r.evidence.length > 0) {
                 lines.push(``);
-                lines.push(`Evidence:`);
+                lines.push(`Static Evidence:`);
                 for (const ev of r.evidence) {
                     const loc =
                         ev.file && ev.line ? `${ev.file}:${ev.line}` : ev.file ? ev.file : "";

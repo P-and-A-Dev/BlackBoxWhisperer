@@ -2,6 +2,11 @@ import type { ArtifactMeta, ArtifactType, ProducedByMeta } from "./ArtifactTypes
 
 export interface PutJsonOptions {
 	schemaPath?: string;
+	overwrite?: boolean;
+}
+
+export interface PutTextOptions {
+	overwrite?: boolean;
 }
 
 export interface ArtifactStore {
@@ -23,7 +28,8 @@ export interface ArtifactStore {
 		id: string,
 		type: Exclude<ArtifactType, "json">,
 		content: string,
-		producedBy: ProducedByMeta
+		producedBy: ProducedByMeta,
+		options?: PutTextOptions
 	): Promise<ArtifactMeta>;
 
 	// listing

@@ -5,15 +5,15 @@ import { PipelineImpl } from "../core/pipeline/PipelineImpl.js";
 import { InMemoryEventBus } from "../core/logging/EventBus.js";
 import { ArtifactStoreFs } from "../core/artifacts/ArtifactStoreFs.js";
 import type { ArtifactManifest } from "../core/artifacts/ArtifactManifest.js";
-import { HelloStage } from "../adapters/cobol/stages/hello.stage.js";
 import type { RunConfig } from "../core/pipeline/RunConfig.js";
-import { DiscoverFilesStage } from "../adapters/cobol/stages/discoverFiles.stage.js";
+import { DiscoverFilesStage } from "../core/pipeline/stages/discoverFiles.stage.js";
 import type { PipelineContext } from "../core/pipeline/Context.js";
-import { CobolIndexStage } from "../adapters/cobol/stages/cobolIndex.stage.js";
-import { CallGraphStage } from "../adapters/cobol/stages/callgraph.stage.js";
-import { MetricsStage } from "../adapters/cobol/stages/metrics.stage.js";
-import { RisksStage } from "../adapters/cobol/stages/risks.stage.js";
-import { ReportStage } from "../adapters/cobol/stages/report.stage.js";
+import { InputsSyncStage } from "../core/pipeline/stages/inputsSync.stage.js";
+import { ManifestFinalizeStage } from "../core/artifacts/stages/manifestFinalize.stage.js";
+import { AdapterRegistry } from "../core/registry/AdapterRegistry.js";
+
+// Initialize registry (could be dynamic in future)
+AdapterRegistry.init();
 
 function runId(): string {
     return "run-" + new Date().toISOString().replace(/[:.]/g, "-");
@@ -21,20 +21,27 @@ function runId(): string {
 
 async function main(): Promise<void> {
     const projectRoot = process.argv[2] ?? ".";
+    // Can be passed via env or argv, defaulting to cobol for V1
+    const adapterId = process.env.ADAPTER || "cobol";
 
     if (!fs.existsSync(projectRoot)) {
         throw new Error(`Project root does not exist: ${projectRoot}`);
     }
 
+    // 1. Resolve Adapter
+    const adapter = AdapterRegistry.get(adapterId);
+    console.log(`Using adapter: ${adapter.id} - ${adapter.description}`);
+
     const run = runId();
     const outDir = path.resolve("runs", run);
     fs.mkdirSync(outDir, { recursive: true });
 
+    // 2. Prepare Config & Context
     const manifest: ArtifactManifest = {
         schemaVersion: "1.0",
         runId: run,
         projectRoot: path.resolve(projectRoot),
-        adapter: "cobol",
+        adapter: adapter.id, // from adapter
         createdAt: new Date().toISOString(),
         inputs: { files: [] },
         outputs: {}
@@ -46,46 +53,33 @@ async function main(): Promise<void> {
     const config: RunConfig = {
         projectRoot,
         outDir,
-        adapter: "cobol",
+        adapter: adapter.id as any,
         mode: "cli",
-        strict: true
+        strict: true,
+        kindMap: adapter.kindMap // Get kinds from adapter
     };
 
     const ctx: PipelineContext = {
         runId: run,
         config,
         inputs: { files: [] },
-        scratch: {},
         artifacts,
         events
     };
 
+    // 3. Build Pipeline
     const pipeline = new PipelineImpl();
 
-    await pipeline.run([
-        DiscoverFilesStage,
-        CobolIndexStage,
-        CallGraphStage,
-        MetricsStage,
-        RisksStage,
-        ReportStage
-    ], ctx);
+    const stages = [
+        DiscoverFilesStage,     // Core
+        InputsSyncStage,        // Core
+        ...adapter.getStages(), // Adapter specific
+        ManifestFinalizeStage   // Core
+    ];
 
-    manifest.inputs.files = ctx.inputs.files.map((f) => ({
-        path: f.path,
-        sha256: f.sha256,
-        size: f.size,
-        kind: f.kind
-    }));
+    await pipeline.run(stages, ctx);
 
     console.log(`Discovered files: ${ctx.inputs.files.length}`);
-
-    fs.writeFileSync(
-        path.join(outDir, "artifact_manifest.json"),
-        JSON.stringify(manifest, null, 2),
-        "utf-8"
-    );
-
     console.log(`Run completed: ${run}`);
 }
 

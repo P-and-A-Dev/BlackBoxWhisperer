@@ -13,6 +13,7 @@ export interface RunConfig {
 	mode: RunMode;
 	strict: boolean;        // fail-fast if missing artifact / invalid schema
 	inputGlobs?: string[];  // optional (else adapter decide)
+	kindMap?: Record<string, string>; // extension (.cbl) -> kind (cobol)
 	limits?: RunLimits;
 }
 

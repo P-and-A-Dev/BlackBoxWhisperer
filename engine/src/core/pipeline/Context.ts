@@ -15,14 +15,13 @@ export interface PipelineInputs {
 	files: InputFileRef[];
 }
 
-export type Scratchpad = Record<string, unknown>;
+
 
 export interface PipelineContext {
 	runId: RunId;
 	config: RunConfig;
 
 	inputs: PipelineInputs;
-	scratch: Scratchpad;
 
 	artifacts: ArtifactStore;
 	events: EventBus;

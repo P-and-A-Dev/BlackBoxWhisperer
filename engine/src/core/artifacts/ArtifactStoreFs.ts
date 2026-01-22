@@ -7,7 +7,7 @@ import type {
     ArtifactType,
     ProducedByMeta
 } from "./ArtifactTypes.js";
-import type { ArtifactStore } from "./ArtifactStore.js";
+import type { ArtifactStore, PutJsonOptions, PutTextOptions } from "./ArtifactStore.js";
 import type { ArtifactManifest } from "./ArtifactManifest.js";
 
 export class ArtifactStoreFs implements ArtifactStore {
@@ -41,8 +41,12 @@ export class ArtifactStoreFs implements ArtifactStore {
     async putJson<T>(
         id: string,
         data: T,
-        producedBy: ProducedByMeta
+        producedBy: ProducedByMeta,
+        options?: PutJsonOptions
     ): Promise<ArtifactMeta> {
+        if (this.outputs.has(id) && !options?.overwrite) {
+            throw new Error(`Artifact collision: ${id} already exists`);
+        }
         const relPath = `${id}.json`;
         const absPath = path.join(this.outDir, relPath);
 
@@ -69,8 +73,12 @@ export class ArtifactStoreFs implements ArtifactStore {
         id: string,
         type: Exclude<ArtifactType, "json">,
         content: string,
-        producedBy: ProducedByMeta
+        producedBy: ProducedByMeta,
+        options?: PutTextOptions
     ): Promise<ArtifactMeta> {
+        if (this.outputs.has(id) && !options?.overwrite) {
+            throw new Error(`Artifact collision: ${id} already exists`);
+        }
         const ext = type === "markdown" ? "md" : "mmd";
         const relPath = `${id}.${ext}`;
         const absPath = path.join(this.outDir, relPath);
@@ -91,6 +99,14 @@ export class ArtifactStoreFs implements ArtifactStore {
         this.manifest.outputs[id] = meta;
 
         return meta;
+    }
+
+    async writeManifest(): Promise<void> {
+        const fs = await import("node:fs/promises");
+        const path = await import("node:path");
+
+        const abs = path.join(this.outDir, "artifact_manifest.json");
+        await fs.writeFile(abs, JSON.stringify(this.manifest, null, 2), "utf-8");
     }
 }
 
