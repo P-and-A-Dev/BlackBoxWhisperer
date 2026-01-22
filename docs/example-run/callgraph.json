@@ -1,0 +1,51 @@
+{
+	"nodes": [
+		{
+			"id": "PAYMAIN",
+			"type": "program",
+			"label": "Main Payment Orchestrator"
+		},
+		{
+			"id": "INIT-PAYMENT",
+			"type": "section",
+			"label": "Initialize payment context"
+		},
+		{
+			"id": "VALIDATE-AMOUNT",
+			"type": "paragraph",
+			"label": "Validate transaction amount"
+		},
+		{
+			"id": "DB-UPDATE",
+			"type": "program",
+			"label": "Database Update Module"
+		},
+		{
+			"id": "LOGGING",
+			"type": "program",
+			"label": "Central Logging Program"
+		}
+	],
+	"edges": [
+		{
+			"from": "PAYMAIN",
+			"to": "INIT-PAYMENT",
+			"relation": "PERFORM"
+		},
+		{
+			"from": "INIT-PAYMENT",
+			"to": "VALIDATE-AMOUNT",
+			"relation": "PERFORM"
+		},
+		{
+			"from": "PAYMAIN",
+			"to": "DB-UPDATE",
+			"relation": "CALL"
+		},
+		{
+			"from": "PAYMAIN",
+			"to": "LOGGING",
+			"relation": "CALL"
+		}
+	]
+}

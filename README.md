@@ -244,7 +244,25 @@ Legacy systems remain untouched, but become understandable, controllable, and in
 
 ---
 
-## Status
+## Rules & Guarantees (Phase B2)
+ 
+ ### 1. Stage ID Stability
+ - **Stage IDs (e.g., `cobol.index`, `graph.call`) are public contracts.**
+ - They are recorded in the `artifact_manifest.json`.
+ - Any change to a Stage ID is considered a **breaking change** and invalidates previous runs.
+ - Cross-run comparisons and AI reasoning rely on these IDs being immutable.
+ 
+ ### 2. The "No Source" Rule
+ > [!IMPORTANT]
+ > **The AI layer NEVER sees raw source code.**
+ 
+ - The AI consumes *only* the structured, deterministic artifacts listed in `artifact_manifest.json`.
+ - Direct access to source files or raw logs by the AI model is **forbidden by architecture**.
+ - This ensures all insights are traceable to a proved, static evidence artifact produced by the deterministic engine.
+ 
+ ---
+ 
+ ## Status
 
 Concept / prototype design with a clear execution path:
 - V1: deterministic core + COBOL adapter + Flutter UI

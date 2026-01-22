@@ -1,0 +1,27 @@
+{
+	"schemaVersion": "1.0",
+	"runId": "run-2026-01-04T21-15-00Z",
+	"projectRoot": "/legacy/payments-system",
+	"inputs": {
+		"files": 42,
+		"logs": [
+			"logs/app.log",
+			"logs/batch.log"
+		],
+		"adapters": [
+			"cobol"
+		]
+	},
+	"outputs": {
+		"graphs": [
+			"callgraph.json"
+		],
+		"metrics": [
+			"metrics.json"
+		],
+		"risks": [
+			"risks.json"
+		],
+		"report": "report.md"
+	}
+}

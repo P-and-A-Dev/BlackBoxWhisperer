@@ -1,0 +1,15 @@
+{
+	"type": "object",
+	"required": [
+		"programCount",
+		"callCount"
+	],
+	"properties": {
+		"programCount": {
+			"type": "integer"
+		},
+		"callCount": {
+			"type": "integer"
+		}
+	}
+}

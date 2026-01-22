@@ -1,0 +1,51 @@
+{
+	"type": "array",
+	"items": {
+		"type": "object",
+		"required": [
+			"id",
+			"title",
+			"severity",
+			"confidence",
+			"evidence"
+		],
+		"properties": {
+			"id": {
+				"type": "string"
+			},
+			"title": {
+				"type": "string"
+			},
+			"severity": {
+				"type": "string",
+				"enum": [
+					"low",
+					"medium",
+					"high",
+					"critical"
+				]
+			},
+			"confidence": {
+				"type": "number"
+			},
+			"evidence": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"required": [
+						"type",
+						"ref"
+					],
+					"properties": {
+						"type": {
+							"type": "string"
+						},
+						"ref": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}

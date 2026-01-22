@@ -1,0 +1,71 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "ArtifactManifest",
+	"type": "object",
+	"required": [
+		"schemaVersion",
+		"runId",
+		"projectRoot",
+		"outputs"
+	],
+	"properties": {
+		"schemaVersion": {
+			"type": "string"
+		},
+		"runId": {
+			"type": "string"
+		},
+		"projectRoot": {
+			"type": "string"
+		},
+		"inputs": {
+			"type": "object",
+			"properties": {
+				"files": {
+					"type": "integer"
+				},
+				"logs": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"adapters": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"outputs": {
+			"type": "object",
+			"required": [
+				"report"
+			],
+			"properties": {
+				"graphs": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"metrics": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"risks": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"report": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

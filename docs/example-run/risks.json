@@ -1,0 +1,30 @@
+[
+	{
+		"id": "RISK-001",
+		"title": "Unvalidated monetary amount before database update",
+		"severity": "high",
+		"confidence": 0.82,
+		"evidence": [
+			{
+				"type": "callgraph-node",
+				"ref": "VALIDATE-AMOUNT"
+			},
+			{
+				"type": "log-pattern",
+				"ref": "NEGATIVE_AMOUNT_ACCEPTED"
+			}
+		]
+	},
+	{
+		"id": "RISK-002",
+		"title": "Central logging program used synchronously in critical path",
+		"severity": "medium",
+		"confidence": 0.67,
+		"evidence": [
+			{
+				"type": "callgraph-edge",
+				"ref": "PAYMAIN->LOGGING"
+			}
+		]
+	}
+]

@@ -1,0 +1,1 @@
+       01 WS-COMMON PIC X(5) VALUE 'ABCDE'.
