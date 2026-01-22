@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "run-2026-01-22T01-57-55-175Z",
+  "projectRoot": "D:\\Documents\\Projets\\Hackathons\\BlackBoxWhisperer\\engine",
+  "adapter": "cobol",
+  "createdAt": "2026-01-22T01:57:55.176Z",
+  "inputs": {
+    "files": [
+      {
+        "path": ".gitignore",
+        "sha256": "8a2d5a11310a540224f005b0dbcf3e6d2e657bfedaf72b3de59937cbd8e9d4b9",
+        "size": 33,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/.gitignore",
+        "sha256": "99cf8e0c674840955d03ff19a4501c7ed49bbb2529ca9a1f6761a80108ee4ebe",
+        "size": 238,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/copilot.data.migration.agent.xml",
+        "sha256": "4805746a1cdb6ef089ec7c0e198e13992034e08b83ed95122ed605ca99c39653",
+        "size": 195,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/copilot.data.migration.ask2agent.xml",
+        "sha256": "65753465e271eed78cc36dce8b8a00ed3c8fc75eeeb3e2b1fde04a51bcd786c6",
+        "size": 199,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/copilot.data.migration.edit.xml",
+        "sha256": "bb7a167dd77a22fb8fdfb5668df96453bbfb4dd99c0d499fc740b8e0bd73e30c",
+        "size": 194,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/engine.iml",
+        "sha256": "c175f68ed3b5420621f4e81c25a5d205c21978b65b6c4f351a4000a43e6242ad",
+        "size": 288,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/modules.xml",
+        "sha256": "c1fce8d4d107088c09b3cd40eab7924a5aee1497011f4bea717ee71e7e192b59",
+        "size": 271,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/vcs.xml",
+        "sha256": "d0df76de3a966f51606b564edccc430dbc21c32ee5c3f35dccf95597fad81392",
+        "size": 188,
+        "kind": "unknown"
+      },
+      {
+        "path": ".idea/workspace.xml",
+        "sha256": "8dee15783182e19456d125a5013959ad1fd38f9a485051956af0947f500ea98a",
+        "size": 6894,
+        "kind": "unknown"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "f8ba92b5b792e3a2d66f26a514b718be52fb1545b5ba55291be09f9a460fe6b3",
+        "size": 50915,
+        "kind": "unknown"
+      },
+      {
+        "path": "package.json",
+        "sha256": "629f6d961d96f9f21c07d718d0724ea11004ed06b2df61c94b3ef0120cf101d3",
+        "size": 544,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/adapters/cobol/stages/discoverFiles.stage.ts",
+        "sha256": "03ed472e5ecdf039784342b06737dc7d6d01f3166a9ab8537156f46e2dc0b04a",
+        "size": 3586,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/adapters/cobol/stages/hello.stage.ts",
+        "sha256": "ef5b4f1a4acf099362805f51ac31ac363d8ea23c854105a700d29f80a0d2020d",
+        "size": 363,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/cli/main.ts",
+        "sha256": "2075fcd87daa8b710acc379bb197b9319d989ee18cfe5d6b9e578b413a4df0f0",
+        "size": 2494,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/artifacts/ArtifactManifest.ts",
+        "sha256": "04720b63050dee52e19957268bb0799978b34ff40b387368603da2f9d11a09d4",
+        "size": 520,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/artifacts/ArtifactStore.ts",
+        "sha256": "1acd4a99c98353297c8b641d5174f2252a54994904ff2976347bf40050ab3f05",
+        "size": 664,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/artifacts/ArtifactStoreFs.ts",
+        "sha256": "fb07a5a2617cb93f2e0a304456aede76440544ebdf79940a883f5377ef6f1744",
+        "size": 2547,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/artifacts/ArtifactTypes.ts",
+        "sha256": "81b134820d5d7fc04839a644c509cef433200cda172bc22184d274ba1eb1e993",
+        "size": 301,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/artifacts/index.ts",
+        "sha256": "1febca6ef52ffe8e326fe5518e1d46cbfbe6ee011cf2b902c4ceff69a98c7aad",
+        "size": 114,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/logging/EventBus.ts",
+        "sha256": "dead9f84b52cf783516fd88cb2cee896e0af78f11fc4bdd5869543c95f87ec8e",
+        "size": 370,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/logging/events.ts",
+        "sha256": "f4ca2c3b23ecf443800b53f396768b4f106c47a3baf2f0e8bff57f5e841688dc",
+        "size": 1212,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/logging/index.ts",
+        "sha256": "dc87e1ed8e2f6072d49b5f9a8f9db688812676971769bc3cc913abcdfa59488d",
+        "size": 30,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/Context.ts",
+        "sha256": "fbd8bac0ce6fe9dbabd4b20a430e49150144e06bb23a4181cbf028b6bd716197",
+        "size": 648,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/index.ts",
+        "sha256": "41ed24f9aab8d6440d63794e1b8c5d0bcb5254f1af6624906ee083b6d46771e4",
+        "size": 125,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/Pipeline.ts",
+        "sha256": "bee9d1fe5a9b09e0f4b6b4c4fbf084bbb551d601a3ae34d0e41502073e4dd857",
+        "size": 191,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/PipelineImpl.ts",
+        "sha256": "25206d66998210da466288889c57b3a2120d3902fdd602d1ee84c60086948787",
+        "size": 1418,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/RunConfig.ts",
+        "sha256": "cf15f9daf5f35766dfde40e4211d29e43ebfd3ff59757baea0057a1ffc8bc634",
+        "size": 529,
+        "kind": "unknown"
+      },
+      {
+        "path": "src/core/pipeline/Stage.ts",
+        "sha256": "9fae836a5ebc02ae6891f7d28506a49baaf5b50befb33b56219056694abfd303",
+        "size": 201,
+        "kind": "unknown"
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "aa3f98675c961d7cae7747a223523823e6eb8652c16189da5d38329682974031",
+        "size": 418,
+        "kind": "unknown"
+      }
+    ]
+  },
+  "outputs": {
+    "hello": {
+      "id": "hello",
+      "type": "json",
+      "path": "hello.json",
+      "sha256": "c3a4ad9c0f3106622e2e2075778e36d6a33b8bd1ef979fcd29aeacb6e6d28518",
+      "producedBy": {
+        "stageId": "hello",
+        "stageVersion": "1.0.0"
+      }
+    }
+  }
+}

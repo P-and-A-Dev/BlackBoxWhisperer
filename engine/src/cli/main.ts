@@ -7,6 +7,8 @@ import { ArtifactStoreFs } from "../core/artifacts/ArtifactStoreFs.js";
 import type { ArtifactManifest } from "../core/artifacts/ArtifactManifest.js";
 import { HelloStage } from "../adapters/cobol/stages/hello.stage.js";
 import type { RunConfig } from "../core/pipeline/RunConfig.js";
+import { DiscoverFilesStage } from "../adapters/cobol/stages/discoverFiles.stage.js";
+import type { PipelineContext } from "../core/pipeline/Context.js";
 
 function runId(): string {
     return "run-" + new Date().toISOString().replace(/[:.]/g, "-");
@@ -44,17 +46,25 @@ async function main(): Promise<void> {
         strict: true
     };
 
-    const ctx = {
+    const ctx: PipelineContext = {
         runId: run,
-        config: config,
+        config,
         inputs: { files: [] },
         scratch: {},
         artifacts,
         events
     };
 
+
     const pipeline = new PipelineImpl();
-    await pipeline.run([HelloStage], ctx);
+    await pipeline.run([DiscoverFilesStage, HelloStage], ctx);
+    manifest.inputs.files = ctx.inputs.files.map((f) => ({
+        path: f.path,
+        sha256: f.sha256,
+        size: f.size,
+        kind: f.kind
+    }));
+    console.log(`Discovered files: ${ctx.inputs.files.length}`);
 
     fs.writeFileSync(
         path.join(outDir, "artifact_manifest.json"),
