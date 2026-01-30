@@ -1,4 +1,4 @@
-import 'package:ui/features/run/domain/integrity_status.dart';
+import 'package:blackbox_ui/features/run/domain/integrity_status.dart';
 
 import '../domain/artifact_id.dart';
 import '../domain/manifest.dart';

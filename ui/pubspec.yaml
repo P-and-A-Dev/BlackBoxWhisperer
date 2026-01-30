@@ -1,4 +1,4 @@
-name: ui
+name: blackbox_ui
 description: "Black Box Whisperer UI is a Flutter Desktop application for exploring deterministic static analysis runs produced by the Black Box Whisperer engine. It allows users to load an analysis run, inspect generated artifacts (graphs, metrics, risks, reports), and understand legacy systems without accessing source code."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

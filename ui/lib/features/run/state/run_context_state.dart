@@ -1,5 +1,5 @@
-import 'package:ui/features/run/domain/integrity_status.dart';
-import 'package:ui/features/run/domain/manifest.dart';
+import 'package:blackbox_ui/features/run/domain/integrity_status.dart';
+import 'package:blackbox_ui/features/run/domain/manifest.dart';
 
 enum RunStatus { idle, loading, ready, error }
 

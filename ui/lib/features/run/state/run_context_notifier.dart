@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ui/features/run/data/run_repository.dart';
-import 'package:ui/features/run/state/run_context_state.dart';
+import 'package:blackbox_ui/features/run/data/run_repository.dart';
+import 'package:blackbox_ui/features/run/state/run_context_state.dart';
 
 import '../domain/integrity_status.dart';
 import '../io/run_fs.dart';

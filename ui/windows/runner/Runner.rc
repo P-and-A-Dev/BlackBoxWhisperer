@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "fr.avainfo" "\0"
-            VALUE "FileDescription", "ui" "\0"
+            VALUE "FileDescription", "blackbox_ui" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ui" "\0"
+            VALUE "InternalName", "blackbox_ui" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 fr.avainfo. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ui.exe" "\0"
-            VALUE "ProductName", "ui" "\0"
+            VALUE "OriginalFilename", "blackbox_ui.exe" "\0"
+            VALUE "ProductName", "BlackBox" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
