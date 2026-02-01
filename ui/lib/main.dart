@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:blackbox_ui/pages/home_page.dart';
+import 'package:blackbox_ui/pages/home_view.dart';
 
 void main() {
   runApp(
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BlackBox UI',
-      home: HomePage(),
+      home: HomeView(),
     );
   }
 }
