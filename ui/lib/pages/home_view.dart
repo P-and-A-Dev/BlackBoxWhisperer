@@ -1,3 +1,4 @@
+import 'package:blackbox_ui/run_picker_checker/run_check_service.dart';
 import 'package:blackbox_ui/states/home_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,15 @@ class _HomeViewState extends State<HomeView> {
         key: ValueKey(_mode),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
+        child: Center(
+          child: TextButton(
+            onPressed: () {
+              // TODO : Don't forget to put a path that exist
+              RunCheckService().checkRunFolder("");
+            },
+            child: Text("Test"),
+          ),
+        ),
       ),
     };
   }
