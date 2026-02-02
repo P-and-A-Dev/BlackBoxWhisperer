@@ -14,6 +14,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF101622),
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 250),
         transitionBuilder: (child, animation) =>
