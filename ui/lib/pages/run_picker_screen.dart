@@ -22,7 +22,10 @@ class _RunPickerScreenState extends State<RunPickerScreen> {
               child: Stack(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width / 10 * 4,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width / 10 * 4,
                     decoration: BoxDecoration(
                       color: AppColors.foreground,
                       borderRadius: .circular(15),
