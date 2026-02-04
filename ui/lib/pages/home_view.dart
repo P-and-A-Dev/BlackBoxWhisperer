@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildContent() {
     return switch (_mode) {
-      HomeMode.main => Container(
+      HomeMode.main => SizedBox(
         key: ValueKey(_mode),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
