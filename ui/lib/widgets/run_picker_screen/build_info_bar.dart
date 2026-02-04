@@ -1,3 +1,4 @@
+import 'package:blackbox_ui/widgets/common/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -25,12 +26,10 @@ class BuildInfoBar extends StatelessWidget {
                 child: child,
               );
             },
-            child: Text(
+            child: AppText(
               "Black Box Whisperer v$version",
               key: ValueKey(version),
-              style: TextStyle(
-                color: Colors.white.withAlpha(50),
-              ),
+              type: .info,
             ),
           );
         },
