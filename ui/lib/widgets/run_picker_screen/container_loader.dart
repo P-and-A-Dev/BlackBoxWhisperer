@@ -30,10 +30,7 @@ class _ContainerLoaderState extends State<ContainerLoader> {
       curve: Curves.easeInOut,
       opacity: opacity,
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width / 10 * 4,
+        width: MediaQuery.of(context).size.width / 10 * 4,
         decoration: BoxDecoration(
           color: AppColors.background,
           borderRadius: .circular(15),
