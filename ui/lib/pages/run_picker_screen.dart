@@ -1,7 +1,8 @@
-import 'package:blackbox_ui/widgets/run_picker_screen/container_loader.dart';
-import 'package:blackbox_ui/widgets/run_picker_screen/picker_header.dart';
+import 'package:blackbox_ui/widgets/run_picker_screen/drag_and_drop.dart';
 import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:blackbox_ui/widgets/run_picker_screen/build_info_bar.dart';
+import 'package:blackbox_ui/widgets/run_picker_screen/container_loader.dart';
+import 'package:blackbox_ui/widgets/run_picker_screen/picker_header.dart';
 import 'package:flutter/material.dart';
 
 class RunPickerScreen extends StatefulWidget {
@@ -32,6 +33,7 @@ class _RunPickerScreenState extends State<RunPickerScreen> {
                     child: Column(
                       children: [
                         PickerHeader(),
+                        DragAndDrop(),
                       ],
                     ),
                   ),

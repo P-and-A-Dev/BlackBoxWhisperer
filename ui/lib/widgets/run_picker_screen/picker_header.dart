@@ -10,7 +10,7 @@ class PickerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const .symmetric(vertical: 24),
+      padding: const .symmetric(vertical: 36),
       child: Column(
         children: [
           Container(
