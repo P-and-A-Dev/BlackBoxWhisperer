@@ -21,6 +21,7 @@ class DragAndDrop extends StatefulWidget {
 
 class _DragAndDropState extends State<DragAndDrop> {
   bool _isDragging = false;
+  int alpha = 15;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,20 @@ class _DragAndDropState extends State<DragAndDrop> {
         },
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
+          onEnter: (event) {
+            if (alpha == 15) {
+              setState(() {
+                alpha = 40;
+              });
+            }
+          },
+          onExit: (event) {
+            if (alpha == 40) {
+              setState(() {
+                alpha = 15;
+              });
+            }
+          },
           child: GestureDetector(
             onTap: () {
               // TODO: Open file picker
@@ -63,7 +78,7 @@ class _DragAndDropState extends State<DragAndDrop> {
                 strokeWidth: _isDragging ? 4.0 : 2.5,
                 dashPattern: [10, 5],
               ),
-              child: Container(
+              child: AnimatedContainer(
                 height: 250,
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
@@ -72,12 +87,13 @@ class _DragAndDropState extends State<DragAndDrop> {
                       : Colors.transparent,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withAlpha(15),
+                      color: AppColors.primary.withAlpha(alpha),
                       blurRadius: 25,
                       spreadRadius: 10,
                     ),
                   ],
                 ),
+                duration: Duration(milliseconds: 250),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
