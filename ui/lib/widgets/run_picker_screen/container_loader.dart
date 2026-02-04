@@ -2,9 +2,9 @@ import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ContainerLoader extends StatefulWidget {
-  const ContainerLoader({
-    super.key,
-  });
+  final VoidCallback onFinished;
+
+  const ContainerLoader({super.key, required this.onFinished});
 
   @override
   State<ContainerLoader> createState() => _ContainerLoaderState();
@@ -16,10 +16,9 @@ class _ContainerLoaderState extends State<ContainerLoader> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 500)).then((_) {
-      setState(() {
-        opacity = 0;
-      });
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
+      setState(() => opacity = 0);
     });
   }
 
@@ -29,11 +28,12 @@ class _ContainerLoaderState extends State<ContainerLoader> {
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       opacity: opacity,
+      onEnd: widget.onFinished,
       child: Container(
         width: MediaQuery.of(context).size.width / 10 * 4,
         decoration: BoxDecoration(
+          border: .all(color: AppColors.background),
           color: AppColors.background,
-          borderRadius: .circular(15),
         ),
       ),
     );

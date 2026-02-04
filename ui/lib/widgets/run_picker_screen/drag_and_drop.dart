@@ -14,7 +14,6 @@ class DragAndDrop extends StatelessWidget {
     return Padding(
       padding: .symmetric(horizontal: 48, vertical: 12),
       child: MouseRegion(
-        onHover: (_) => debugPrint("hover zone"),
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: () {

@@ -13,6 +13,8 @@ class RunPickerScreen extends StatefulWidget {
 }
 
 class _RunPickerScreenState extends State<RunPickerScreen> {
+  bool _showLoader = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +39,12 @@ class _RunPickerScreenState extends State<RunPickerScreen> {
                       ],
                     ),
                   ),
-                  ContainerLoader(),
+                  if (_showLoader)
+                    ContainerLoader(
+                      onFinished: () {
+                        setState(() => _showLoader = false);
+                      },
+                    ),
                 ],
               ),
             ),
