@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "run-2026-02-04T04-06-37-172Z",
+  "projectRoot": "D:\\Documents\\Development\\Cobol\\TestProject",
+  "adapter": "cobol",
+  "createdAt": "2026-02-04T04:06:37.173Z",
+  "inputs": {
+    "files": [
+      {
+        "path": "BATCH.cbl",
+        "sha256": "2a7f97ee4eb72238a0932fee6463ae7a64fa505913a9cec7b12c1325992c4f01",
+        "size": 3733,
+        "kind": "cobol"
+      },
+      {
+        "path": "CALCUL.cbl",
+        "sha256": "f7ac235ad8d411cf586e84d64fad17a6f95493e9ca978513a8ef7aebd62f778c",
+        "size": 2988,
+        "kind": "cobol"
+      },
+      {
+        "path": "COPYBOOK.cpy",
+        "sha256": "04a372bc290ec9cff239ca4c1065f7d120bedef902095ecd992460d887b03265",
+        "size": 1535,
+        "kind": "copybook"
+      },
+      {
+        "path": "FICHIER.cbl",
+        "sha256": "6008d3e8ffa630ff342c2e70f500fabb3e112254b133843018887ce6fff5fd96",
+        "size": 5711,
+        "kind": "cobol"
+      },
+      {
+        "path": "MAINPROG.cbl",
+        "sha256": "35fb1ae3ae72ca656c0f451393e39bb2be039d6e246ceab426956d3ad60ec0bd",
+        "size": 3644,
+        "kind": "cobol"
+      },
+      {
+        "path": "README.md",
+        "sha256": "defadc9f5132f2bea73f67700b9e7eb5f2f521b2fd8f6fe26d846f5ffb2d67b8",
+        "size": 1891,
+        "kind": "unknown"
+      }
+    ]
+  },
+  "outputs": {
+    "cobol_index": {
+      "id": "cobol_index",
+      "type": "json",
+      "path": "cobol_index.json",
+      "sha256": "ae15bba8b943b420f328e83262777b210a221966bb0788f6f1c6bed04f106416",
+      "producedBy": {
+        "stageId": "cobol.index",
+        "stageVersion": "1.0.0"
+      }
+    },
+    "callgraph": {
+      "id": "callgraph",
+      "type": "json",
+      "path": "callgraph.json",
+      "sha256": "681eba7d47b703e4283187be0691807c3f35da0ee2ba41413bf1ce9121070159",
+      "producedBy": {
+        "stageId": "graph.call",
+        "stageVersion": "1.0.0"
+      }
+    },
+    "metrics": {
+      "id": "metrics",
+      "type": "json",
+      "path": "metrics.json",
+      "sha256": "a71c62f2f32b1b3725d554f92becdd9d91a772d148257df0e2ba3b799a390e9c",
+      "producedBy": {
+        "stageId": "metrics.compute",
+        "stageVersion": "1.0.0"
+      }
+    },
+    "risks": {
+      "id": "risks",
+      "type": "json",
+      "path": "risks.json",
+      "sha256": "cccf877145cc072c8b26a1ad23fc42b3e3f1d395b7d14e985a9edb3b48824c51",
+      "producedBy": {
+        "stageId": "risks.compute",
+        "stageVersion": "1.0.0"
+      }
+    },
+    "report": {
+      "id": "report",
+      "type": "markdown",
+      "path": "report.md",
+      "sha256": "de2b8c0125319e6508f94d08f752c8c417e15e2b7069e62002255e64f53f4ebb",
+      "producedBy": {
+        "stageId": "report.render",
+        "stageVersion": "1.0.0"
+      }
+    }
+  }
+}

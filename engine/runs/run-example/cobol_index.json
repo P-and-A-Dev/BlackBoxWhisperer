@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "adapter": "cobol",
+  "generatedFrom": {
+    "fileCount": 5
+  },
+  "programs": [
+    {
+      "file": "BATCH.cbl",
+      "sha256": "2a7f97ee4eb72238a0932fee6463ae7a64fa505913a9cec7b12c1325992c4f01",
+      "calls": [],
+      "performs": [
+        {
+          "target": "INITIALISER-TABLES",
+          "raw": "           PERFORM INITIALISER-TABLES",
+          "line": 36
+        },
+        {
+          "target": "TRAITER-PRIX",
+          "raw": "           PERFORM TRAITER-PRIX",
+          "line": 37
+        },
+        {
+          "target": "CALCULER-STATISTIQUES",
+          "raw": "           PERFORM CALCULER-STATISTIQUES",
+          "line": 38
+        },
+        {
+          "target": "AFFICHER-RESULTATS",
+          "raw": "           PERFORM AFFICHER-RESULTATS",
+          "line": 39
+        },
+        {
+          "target": "VARYING",
+          "raw": "           PERFORM VARYING WS-I FROM 1 BY 1",
+          "line": 47
+        },
+        {
+          "target": "VARYING",
+          "raw": "           PERFORM VARYING WS-J FROM 1 BY 1",
+          "line": 56
+        },
+        {
+          "target": "VARYING",
+          "raw": "           PERFORM VARYING IDX-PRIX FROM 1 BY 1",
+          "line": 66
+        },
+        {
+          "target": "VARYING",
+          "raw": "           PERFORM VARYING IDX-MOIS FROM 1 BY 1",
+          "line": 86
+        }
+      ],
+      "copies": [],
+      "programId": "BATCH"
+    },
+    {
+      "file": "CALCUL.cbl",
+      "sha256": "f7ac235ad8d411cf586e84d64fad17a6f95493e9ca978513a8ef7aebd62f778c",
+      "calls": [],
+      "performs": [
+        {
+          "target": "FAIRE-ADDITION",
+          "raw": "                   PERFORM FAIRE-ADDITION",
+          "line": 40
+        },
+        {
+          "target": "FAIRE-SOUSTRACTION",
+          "raw": "                   PERFORM FAIRE-SOUSTRACTION",
+          "line": 42
+        },
+        {
+          "target": "FAIRE-MULTIPLICATION",
+          "raw": "                   PERFORM FAIRE-MULTIPLICATION",
+          "line": 44
+        },
+        {
+          "target": "FAIRE-DIVISION",
+          "raw": "                   PERFORM FAIRE-DIVISION",
+          "line": 46
+        }
+      ],
+      "copies": [],
+      "programId": "CALCUL"
+    },
+    {
+      "file": "COPYBOOK.cpy",
+      "sha256": "04a372bc290ec9cff239ca4c1065f7d120bedef902095ecd992460d887b03265",
+      "calls": [],
+      "performs": [],
+      "copies": []
+    },
+    {
+      "file": "FICHIER.cbl",
+      "sha256": "6008d3e8ffa630ff342c2e70f500fabb3e112254b133843018887ce6fff5fd96",
+      "calls": [],
+      "performs": [
+        {
+          "target": "OUVRIR-FICHIERS",
+          "raw": "           PERFORM OUVRIR-FICHIERS",
+          "line": 73
+        },
+        {
+          "target": "ECRIRE-ENTETE",
+          "raw": "           PERFORM ECRIRE-ENTETE",
+          "line": 74
+        },
+        {
+          "target": "TRAITER-EMPLOYES",
+          "raw": "           PERFORM TRAITER-EMPLOYES",
+          "line": 75
+        },
+        {
+          "target": "ECRIRE-TOTAL",
+          "raw": "           PERFORM ECRIRE-TOTAL",
+          "line": 76
+        },
+        {
+          "target": "FERMER-FICHIERS",
+          "raw": "           PERFORM FERMER-FICHIERS",
+          "line": 77
+        },
+        {
+          "target": "LIRE-EMPLOYE",
+          "raw": "           PERFORM LIRE-EMPLOYE",
+          "line": 98
+        },
+        {
+          "target": "UNTIL",
+          "raw": "           PERFORM UNTIL WS-EOF",
+          "line": 99
+        },
+        {
+          "target": "CALCULER-ANCIENNETE",
+          "raw": "               PERFORM CALCULER-ANCIENNETE",
+          "line": 102
+        },
+        {
+          "target": "FORMATER-LIGNE",
+          "raw": "               PERFORM FORMATER-LIGNE",
+          "line": 103
+        },
+        {
+          "target": "ECRIRE-LIGNE",
+          "raw": "               PERFORM ECRIRE-LIGNE",
+          "line": 104
+        },
+        {
+          "target": "LIRE-EMPLOYE",
+          "raw": "               PERFORM LIRE-EMPLOYE",
+          "line": 105
+        }
+      ],
+      "copies": [],
+      "programId": "FICHIER"
+    },
+    {
+      "file": "MAINPROG.cbl",
+      "sha256": "35fb1ae3ae72ca656c0f451393e39bb2be039d6e246ceab426956d3ad60ec0bd",
+      "calls": [],
+      "performs": [
+        {
+          "target": "INITIALISATION",
+          "raw": "           PERFORM INITIALISATION",
+          "line": 52
+        },
+        {
+          "target": "TRAITEMENT-PRINCIPAL",
+          "raw": "           PERFORM TRAITEMENT-PRINCIPAL",
+          "line": 53
+        },
+        {
+          "target": "FINALISATION",
+          "raw": "           PERFORM FINALISATION",
+          "line": 54
+        },
+        {
+          "target": "LECTURE-COMPTE",
+          "raw": "           PERFORM LECTURE-COMPTE",
+          "line": 66
+        },
+        {
+          "target": "UNTIL",
+          "raw": "           PERFORM UNTIL WS-EOF",
+          "line": 67
+        },
+        {
+          "target": "AFFICHAGE-COMPTE",
+          "raw": "               PERFORM AFFICHAGE-COMPTE",
+          "line": 70
+        },
+        {
+          "target": "CALCUL-INTERETS",
+          "raw": "               PERFORM CALCUL-INTERETS",
+          "line": 71
+        },
+        {
+          "target": "LECTURE-COMPTE",
+          "raw": "               PERFORM LECTURE-COMPTE",
+          "line": 72
+        },
+        {
+          "target": "AFFICHAGE-STATISTIQUES",
+          "raw": "           PERFORM AFFICHAGE-STATISTIQUES.",
+          "line": 74
+        }
+      ],
+      "copies": [],
+      "programId": "MAINPROG"
+    }
+  ]
+}

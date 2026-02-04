@@ -1,0 +1,520 @@
+{
+  "schemaVersion": "1.0",
+  "adapter": "cobol",
+  "generatedFrom": {
+    "cobolIndexArtifactId": "cobol_index"
+  },
+  "nodes": [
+    {
+      "id": "copybook:COPYBOOK",
+      "label": "COPYBOOK",
+      "kind": "copybook"
+    },
+    {
+      "id": "program:BATCH",
+      "label": "BATCH",
+      "kind": "program"
+    },
+    {
+      "id": "program:BATCH#AFFICHER-RESULTATS",
+      "label": "AFFICHER-RESULTATS",
+      "kind": "program"
+    },
+    {
+      "id": "program:BATCH#CALCULER-STATISTIQUES",
+      "label": "CALCULER-STATISTIQUES",
+      "kind": "program"
+    },
+    {
+      "id": "program:BATCH#INITIALISER-TABLES",
+      "label": "INITIALISER-TABLES",
+      "kind": "program"
+    },
+    {
+      "id": "program:BATCH#TRAITER-PRIX",
+      "label": "TRAITER-PRIX",
+      "kind": "program"
+    },
+    {
+      "id": "program:BATCH#VARYING",
+      "label": "VARYING",
+      "kind": "program"
+    },
+    {
+      "id": "program:CALCUL",
+      "label": "CALCUL",
+      "kind": "program"
+    },
+    {
+      "id": "program:CALCUL#FAIRE-ADDITION",
+      "label": "FAIRE-ADDITION",
+      "kind": "program"
+    },
+    {
+      "id": "program:CALCUL#FAIRE-DIVISION",
+      "label": "FAIRE-DIVISION",
+      "kind": "program"
+    },
+    {
+      "id": "program:CALCUL#FAIRE-MULTIPLICATION",
+      "label": "FAIRE-MULTIPLICATION",
+      "kind": "program"
+    },
+    {
+      "id": "program:CALCUL#FAIRE-SOUSTRACTION",
+      "label": "FAIRE-SOUSTRACTION",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER",
+      "label": "FICHIER",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#CALCULER-ANCIENNETE",
+      "label": "CALCULER-ANCIENNETE",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#ECRIRE-ENTETE",
+      "label": "ECRIRE-ENTETE",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#ECRIRE-LIGNE",
+      "label": "ECRIRE-LIGNE",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#ECRIRE-TOTAL",
+      "label": "ECRIRE-TOTAL",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#FERMER-FICHIERS",
+      "label": "FERMER-FICHIERS",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#FORMATER-LIGNE",
+      "label": "FORMATER-LIGNE",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#LIRE-EMPLOYE",
+      "label": "LIRE-EMPLOYE",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#OUVRIR-FICHIERS",
+      "label": "OUVRIR-FICHIERS",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#TRAITER-EMPLOYES",
+      "label": "TRAITER-EMPLOYES",
+      "kind": "program"
+    },
+    {
+      "id": "program:FICHIER#UNTIL",
+      "label": "UNTIL",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG",
+      "label": "MAINPROG",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#AFFICHAGE-COMPTE",
+      "label": "AFFICHAGE-COMPTE",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#AFFICHAGE-STATISTIQUES",
+      "label": "AFFICHAGE-STATISTIQUES",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#CALCUL-INTERETS",
+      "label": "CALCUL-INTERETS",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#FINALISATION",
+      "label": "FINALISATION",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#INITIALISATION",
+      "label": "INITIALISATION",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#LECTURE-COMPTE",
+      "label": "LECTURE-COMPTE",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#TRAITEMENT-PRINCIPAL",
+      "label": "TRAITEMENT-PRINCIPAL",
+      "kind": "program"
+    },
+    {
+      "id": "program:MAINPROG#UNTIL",
+      "label": "UNTIL",
+      "kind": "program"
+    }
+  ],
+  "edges": [
+    {
+      "from": "program:BATCH",
+      "to": "program:BATCH#AFFICHER-RESULTATS",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "BATCH.cbl",
+          "line": 39,
+          "raw": "           PERFORM AFFICHER-RESULTATS"
+        }
+      ]
+    },
+    {
+      "from": "program:BATCH",
+      "to": "program:BATCH#CALCULER-STATISTIQUES",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "BATCH.cbl",
+          "line": 38,
+          "raw": "           PERFORM CALCULER-STATISTIQUES"
+        }
+      ]
+    },
+    {
+      "from": "program:BATCH",
+      "to": "program:BATCH#INITIALISER-TABLES",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "BATCH.cbl",
+          "line": 36,
+          "raw": "           PERFORM INITIALISER-TABLES"
+        }
+      ]
+    },
+    {
+      "from": "program:BATCH",
+      "to": "program:BATCH#TRAITER-PRIX",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "BATCH.cbl",
+          "line": 37,
+          "raw": "           PERFORM TRAITER-PRIX"
+        }
+      ]
+    },
+    {
+      "from": "program:BATCH",
+      "to": "program:BATCH#VARYING",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "BATCH.cbl",
+          "line": 47,
+          "raw": "           PERFORM VARYING WS-I FROM 1 BY 1"
+        },
+        {
+          "file": "BATCH.cbl",
+          "line": 56,
+          "raw": "           PERFORM VARYING WS-J FROM 1 BY 1"
+        },
+        {
+          "file": "BATCH.cbl",
+          "line": 66,
+          "raw": "           PERFORM VARYING IDX-PRIX FROM 1 BY 1"
+        },
+        {
+          "file": "BATCH.cbl",
+          "line": 86,
+          "raw": "           PERFORM VARYING IDX-MOIS FROM 1 BY 1"
+        }
+      ]
+    },
+    {
+      "from": "program:CALCUL",
+      "to": "program:CALCUL#FAIRE-ADDITION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "CALCUL.cbl",
+          "line": 40,
+          "raw": "                   PERFORM FAIRE-ADDITION"
+        }
+      ]
+    },
+    {
+      "from": "program:CALCUL",
+      "to": "program:CALCUL#FAIRE-DIVISION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "CALCUL.cbl",
+          "line": 46,
+          "raw": "                   PERFORM FAIRE-DIVISION"
+        }
+      ]
+    },
+    {
+      "from": "program:CALCUL",
+      "to": "program:CALCUL#FAIRE-MULTIPLICATION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "CALCUL.cbl",
+          "line": 44,
+          "raw": "                   PERFORM FAIRE-MULTIPLICATION"
+        }
+      ]
+    },
+    {
+      "from": "program:CALCUL",
+      "to": "program:CALCUL#FAIRE-SOUSTRACTION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "CALCUL.cbl",
+          "line": 42,
+          "raw": "                   PERFORM FAIRE-SOUSTRACTION"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#CALCULER-ANCIENNETE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 102,
+          "raw": "               PERFORM CALCULER-ANCIENNETE"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#ECRIRE-ENTETE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 74,
+          "raw": "           PERFORM ECRIRE-ENTETE"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#ECRIRE-LIGNE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 104,
+          "raw": "               PERFORM ECRIRE-LIGNE"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#ECRIRE-TOTAL",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 76,
+          "raw": "           PERFORM ECRIRE-TOTAL"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#FERMER-FICHIERS",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 77,
+          "raw": "           PERFORM FERMER-FICHIERS"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#FORMATER-LIGNE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 103,
+          "raw": "               PERFORM FORMATER-LIGNE"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#LIRE-EMPLOYE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 98,
+          "raw": "           PERFORM LIRE-EMPLOYE"
+        },
+        {
+          "file": "FICHIER.cbl",
+          "line": 105,
+          "raw": "               PERFORM LIRE-EMPLOYE"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#OUVRIR-FICHIERS",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 73,
+          "raw": "           PERFORM OUVRIR-FICHIERS"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#TRAITER-EMPLOYES",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 75,
+          "raw": "           PERFORM TRAITER-EMPLOYES"
+        }
+      ]
+    },
+    {
+      "from": "program:FICHIER",
+      "to": "program:FICHIER#UNTIL",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "FICHIER.cbl",
+          "line": 99,
+          "raw": "           PERFORM UNTIL WS-EOF"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#AFFICHAGE-COMPTE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 70,
+          "raw": "               PERFORM AFFICHAGE-COMPTE"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#AFFICHAGE-STATISTIQUES",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 74,
+          "raw": "           PERFORM AFFICHAGE-STATISTIQUES."
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#CALCUL-INTERETS",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 71,
+          "raw": "               PERFORM CALCUL-INTERETS"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#FINALISATION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 54,
+          "raw": "           PERFORM FINALISATION"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#INITIALISATION",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 52,
+          "raw": "           PERFORM INITIALISATION"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#LECTURE-COMPTE",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 66,
+          "raw": "           PERFORM LECTURE-COMPTE"
+        },
+        {
+          "file": "MAINPROG.cbl",
+          "line": 72,
+          "raw": "               PERFORM LECTURE-COMPTE"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#TRAITEMENT-PRINCIPAL",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 53,
+          "raw": "           PERFORM TRAITEMENT-PRINCIPAL"
+        }
+      ]
+    },
+    {
+      "from": "program:MAINPROG",
+      "to": "program:MAINPROG#UNTIL",
+      "kind": "PERFORM",
+      "evidence": [
+        {
+          "file": "MAINPROG.cbl",
+          "line": 67,
+          "raw": "           PERFORM UNTIL WS-EOF"
+        }
+      ]
+    }
+  ]
+}
