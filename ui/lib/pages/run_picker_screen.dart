@@ -48,7 +48,12 @@ class _RunPickerScreenState extends State<RunPickerScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const PickerHeader(),
-                          const DragAndDrop(),
+                          DragAndDrop(
+                            onFolderDropped: (path) {
+                              debugPrint("Folder dropped: $path");
+                              // TODO: Trigger analysis load
+                            },
+                          ),
                           const InfoContextWidget(),
                           const SizedBox(height: 36),
                         ],
