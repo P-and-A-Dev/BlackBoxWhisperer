@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class RunCheckService {
   static const supportedSchemaVersions = ['1.0', '1.1'];
 
@@ -5,8 +7,8 @@ class RunCheckService {
   /// Valida uma pasta de run.
   Future<void> checkRunFolder(String runFolderPath) async {
     try {
-      // TODO 1.3.1
-      // Verificar se a pasta existe e é acessível
+      // checck if the folder exists and is acessable in the private funncition _checkRunFolderAccessible
+      await _checkRunFolderAccessible(runFolderPath);
 
       // TODO 1.3.2
       // Verificar a presença do arquivo artifact_manifest.json
@@ -30,6 +32,19 @@ class RunCheckService {
   // Funções auxiliares
   // -------------------------
 
-  // TODO: Adicionar aqui funções privadas se necessário
-  // (ex: _checkFolderAccessible, _readManifest, etc.)
+  Future<void> _checkRunFolderAccessible(String path) async {
+    final directory = Directory(path);
+
+    final exists = await directory.exists();
+    if (!exists) {
+      throw Exception('Run folder does not exist');
+    }
+
+    try {
+      // Força acesso real ao filesystem
+      await directory.list(followLinks: false).first;
+    } catch (_) {
+      throw Exception('Run folder is not accessible');
+    }
+  }
 }
