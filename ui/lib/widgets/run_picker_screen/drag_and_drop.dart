@@ -71,7 +71,6 @@ class _DragAndDropState extends State<DragAndDrop> {
               setState(() {
                 alpha = 75;
               });
-              // TODO: Open file picker
               if (!_isExplorerOpened) {
                 _isExplorerOpened = true;
                 debugPrint("Open file picker");
