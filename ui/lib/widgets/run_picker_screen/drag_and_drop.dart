@@ -115,7 +115,7 @@ class _DragAndDropState extends State<DragAndDrop> {
                     ),
                   ],
                 ),
-                duration: Duration(milliseconds: 250),
+                duration: Duration(milliseconds: 150),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
