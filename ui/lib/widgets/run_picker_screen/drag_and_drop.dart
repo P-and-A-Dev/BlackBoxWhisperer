@@ -4,6 +4,7 @@ import 'package:blackbox_ui/widgets/common/app_text.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,6 +23,7 @@ class DragAndDrop extends StatefulWidget {
 class _DragAndDropState extends State<DragAndDrop> {
   bool _isDragging = false;
   int alpha = 15;
+  bool _isExplorerOpened = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +60,37 @@ class _DragAndDropState extends State<DragAndDrop> {
             }
           },
           onExit: (event) {
-            if (alpha == 40) {
+            if (alpha > 15) {
               setState(() {
                 alpha = 15;
               });
             }
           },
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              setState(() {
+                alpha = 75;
+              });
               // TODO: Open file picker
-              debugPrint("Open file picker");
+              if (!_isExplorerOpened) {
+                _isExplorerOpened = true;
+                debugPrint("Open file picker");
+                Future.delayed(Duration(milliseconds: 100)).then(
+                  (value) {
+                    setState(() {
+                      alpha = 40;
+                    });
+                  },
+                );
+                String? selectedDirectory = await FilePicker.platform
+                    .getDirectoryPath();
+
+                if (selectedDirectory != null) {
+                  print("Directory selected : $selectedDirectory");
+                } else {
+                  _isExplorerOpened = false;
+                }
+              }
             },
             child: DottedBorder(
               options: RoundedRectDottedBorderOptions(
