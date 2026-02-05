@@ -1,3 +1,4 @@
+import 'package:blackbox_ui/pages/run_picker_screen.dart';
 import 'package:blackbox_ui/states/home_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +31,8 @@ class _HomeViewState extends State<HomeView> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
       ),
-      HomeMode.runPicker => Container(
+      HomeMode.runPicker => RunPickerScreen(
         key: ValueKey(_mode),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
       ),
     };
   }
