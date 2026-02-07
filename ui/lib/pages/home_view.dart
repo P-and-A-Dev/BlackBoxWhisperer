@@ -3,6 +3,8 @@ import 'package:blackbox_ui/states/home_mode.dart';
 import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'main_screen.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -11,7 +13,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  HomeMode _mode = HomeMode.runPicker;
+  HomeMode _mode = HomeMode.main;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,8 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildContent() {
     return switch (_mode) {
-      HomeMode.main => SizedBox(
+      HomeMode.main => MainScreen(
         key: ValueKey(_mode),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
       ),
       HomeMode.runPicker => RunPickerScreen(
         key: ValueKey(_mode),
