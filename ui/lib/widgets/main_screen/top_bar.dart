@@ -14,7 +14,15 @@ class _TopBarState extends State<TopBar> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      color: Color(0xFF111318),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.white10,
+            width: 1.5,
+          ),
+        ),
+        color: Color(0xFF111318),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
