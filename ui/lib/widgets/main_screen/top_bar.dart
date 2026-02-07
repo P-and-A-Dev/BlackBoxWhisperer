@@ -21,7 +21,7 @@ class _TopBarState extends State<TopBar> {
             width: 1.5,
           ),
         ),
-        color: Color(0xFF111318),
+        color: AppColors.secondaryBackground,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
