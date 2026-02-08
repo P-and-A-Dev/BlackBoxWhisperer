@@ -190,8 +190,10 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
     }
 
     return Container(
-      padding: const EdgeInsets.all(20),
-      color: const Color(0xFF161b22),
+      width: double.infinity,
+      height: double.infinity,
+      color: const Color(0xFF0d1117),
+      padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
