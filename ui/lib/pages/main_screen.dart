@@ -1,5 +1,5 @@
-import 'package:blackbox_ui/widgets/main_screen/artifacts_side_panel.dart';
 import 'package:blackbox_ui/widgets/common/pulse_dots_loader.dart';
+import 'package:blackbox_ui/widgets/main_screen/artifacts_side_panel.dart';
 import 'package:blackbox_ui/widgets/main_screen/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +28,8 @@ class _MainScreenState extends State<MainScreen> {
             Expanded(
               child: Row(
                 children: [
-                  ArtifactsSidePanel(),
+                  const ArtifactsSidePanel(),
                   Expanded(
-                    flex: 3,
                     child: Center(
                       child: const PulseDotsLoader(size: 150),
                     ),
