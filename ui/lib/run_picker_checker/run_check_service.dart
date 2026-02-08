@@ -1,10 +1,13 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:blackbox_ui/models/artifact_manifest.dart';
+import 'package:blackbox_ui/models/run_load_result.dart';
 
 class RunCheckService {
   static const supportedSchemaVersions = ['1.0', '1.1'];
 
-  Future<void> checkRunFolder(String runFolderPath) async {
+  Future<RunLoadResult> loadRunFolder(String runFolderPath) async {
     try {
       await _checkRunFolderAccessible(runFolderPath);
 
@@ -16,9 +19,16 @@ class RunCheckService {
 
       _checkSchemaVersion(manifestJson);
 
-      print('[RunCheckService] Run folder válido');
+      final manifest = ArtifactManifest.fromJson(manifestJson);
+
+      return RunLoadSuccess(runFolderPath, manifest);
+    } on RunLoadError catch (e) {
+      return e;
     } catch (e) {
-      print('TODO: SEND UI ERROR: $e');
+      return RunLoadError(
+        'Unexpected error: $e',
+        RunLoadErrorType.manifestInvalidStructure,
+      );
     }
   }
 
@@ -27,13 +37,19 @@ class RunCheckService {
 
     final exists = await directory.exists();
     if (!exists) {
-      throw Exception('Run folder does not exist');
+      throw RunLoadError(
+        'Run folder does not exist',
+        RunLoadErrorType.folderNotFound,
+      );
     }
 
     try {
       await directory.list(followLinks: false).first;
     } catch (_) {
-      throw Exception('Run folder is not accessible');
+      throw RunLoadError(
+        'Run folder is not accessible',
+        RunLoadErrorType.folderNotAccessible,
+      );
     }
   }
 
@@ -42,7 +58,10 @@ class RunCheckService {
     final file = File(manifestPath);
 
     if (!await file.exists()) {
-      throw Exception('artifact_manifest.json not found');
+      throw RunLoadError(
+        'artifact_manifest.json not found in run folder',
+        RunLoadErrorType.manifestNotFound,
+      );
     }
 
     return file;
@@ -52,7 +71,10 @@ class RunCheckService {
     try {
       return await manifestFile.readAsString();
     } catch (_) {
-      throw Exception('Failed to read artifact_manifest.json');
+      throw RunLoadError(
+        'Failed to read artifact_manifest.json',
+        RunLoadErrorType.manifestNotReadable,
+      );
     }
   }
 
@@ -61,16 +83,25 @@ class RunCheckService {
 
     try {
       decoded = jsonDecode(content);
-    } catch (_) {
-      throw Exception('artifact_manifest.json is not valid JSON');
+    } catch (e) {
+      throw RunLoadError(
+        'artifact_manifest.json is not valid JSON: $e',
+        RunLoadErrorType.manifestInvalidJson,
+      );
     }
 
     if (decoded is! Map<String, dynamic>) {
-      throw Exception('artifact_manifest.json must contain a JSON object');
+      throw RunLoadError(
+        'artifact_manifest.json must contain a JSON object',
+        RunLoadErrorType.manifestInvalidStructure,
+      );
     }
 
     if (!decoded.containsKey('schemaVersion')) {
-      throw Exception('artifact_manifest.json missing schemaVersion');
+      throw RunLoadError(
+        'artifact_manifest.json is missing required field: schemaVersion',
+        RunLoadErrorType.manifestMissingSchemaVersion,
+      );
     }
 
     return decoded;
@@ -80,11 +111,17 @@ class RunCheckService {
     final schemaVersion = manifestJson['schemaVersion'];
 
     if (schemaVersion is! String) {
-      throw Exception('schemaVersion must be a string');
+      throw RunLoadError(
+        'schemaVersion must be a string',
+        RunLoadErrorType.manifestInvalidStructure,
+      );
     }
 
     if (!supportedSchemaVersions.contains(schemaVersion)) {
-      throw Exception('Unsupported schemaVersion: $schemaVersion');
+      throw RunLoadError(
+        'Unsupported schemaVersion: $schemaVersion. Supported versions: ${supportedSchemaVersions.join(", ")}',
+        RunLoadErrorType.manifestUnsupportedVersion,
+      );
     }
   }
 }

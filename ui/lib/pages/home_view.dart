@@ -13,14 +13,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  HomeMode _mode = HomeMode.main;
+  HomeMode _mode = HomeMode.runPicker;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.mainBackground,
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 250),
         transitionBuilder: (child, animation) =>
             FadeTransition(opacity: animation, child: child),
         child: _buildContent(),
@@ -35,6 +35,7 @@ class _HomeViewState extends State<HomeView> {
       ),
       HomeMode.runPicker => RunPickerScreen(
         key: ValueKey(_mode),
+        onNavigate: changeContent,
       ),
     };
   }
