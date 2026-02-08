@@ -2,7 +2,6 @@ import 'package:blackbox_ui/models/artifact_status.dart';
 import 'package:blackbox_ui/states/loaded_run_provider.dart';
 import 'package:blackbox_ui/states/selected_artifact_provider.dart';
 import 'package:blackbox_ui/widgets/artifact_viewer/markdown_artifact_viewer.dart';
-import 'package:blackbox_ui/widgets/common/pulse_dots_loader.dart';
 import 'package:blackbox_ui/widgets/main_screen/artifacts_side_panel.dart';
 import 'package:blackbox_ui/widgets/main_screen/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +50,39 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     LoadedRunState? loadedRun,
   ) {
     if (selectedArtifact == null || loadedRun == null) {
-      return const Center(
-        child: PulseDotsLoader(size: 150),
+      return Container(
+        color: const Color(0xFF1a1d23),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.description_outlined,
+                size: 120,
+                color: Colors.white.withAlpha(25),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'No Artifact Selected',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Select an artifact from the sidebar to inspect its\ndetails and verification status.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white.withAlpha(153),
+                  fontSize: 14,
+                  height: 1.5,
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     }
 
