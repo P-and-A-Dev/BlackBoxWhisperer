@@ -6,24 +6,32 @@ import '../../utils/app_text_type.dart';
 class AppText extends Text {
   final AppTextType type;
   final double? fontSize;
+  final FontWeight? fontWeight;
   final double? letterSpacing;
   final Color? color;
+  final Color? backgroundColor;
+
+  final TextAlign? textAlign;
 
   const AppText(
     super.data, {
     super.key,
     this.type = .subTitle,
     this.fontSize,
+    this.fontWeight,
     this.letterSpacing,
     this.color,
+    this.backgroundColor,
+    this.textAlign,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       data!,
-      textAlign: .center,
+      textAlign: textAlign ?? .center,
       style: GoogleFonts.inter(
+        backgroundColor: backgroundColor,
         color:
             color ??
             Colors.white.withAlpha(
@@ -35,7 +43,7 @@ class AppText extends Text {
             ),
         fontSize: fontSize,
         letterSpacing: type == .title ? -0.5 : letterSpacing ?? 0,
-        fontWeight: type == .title ? .w600 : .w400,
+        fontWeight: fontWeight ?? (type == .title ? .w600 : .w400),
       ),
     );
   }
