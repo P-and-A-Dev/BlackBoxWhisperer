@@ -1,6 +1,7 @@
 import 'package:blackbox_ui/models/artifact_status.dart';
 import 'package:blackbox_ui/states/loaded_run_provider.dart';
 import 'package:blackbox_ui/states/selected_artifact_provider.dart';
+import 'package:blackbox_ui/widgets/artifact_viewer/json_raw_viewer.dart';
 import 'package:blackbox_ui/widgets/artifact_viewer/markdown_artifact_viewer.dart';
 import 'package:blackbox_ui/widgets/main_screen/artifacts_side_panel.dart';
 import 'package:blackbox_ui/widgets/main_screen/top_bar.dart';
@@ -93,18 +94,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       );
     }
 
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.code, size: 64, color: Colors.grey[600]),
-          const SizedBox(height: 16),
-          Text(
-            'JSON viewer coming soon',
-            style: TextStyle(color: Colors.grey[600], fontSize: 16),
-          ),
-        ],
-      ),
+    return JsonRawViewer(
+      artifact: selectedArtifact,
+      runFolderPath: loadedRun.runFolderPath,
     );
   }
 }
