@@ -20,7 +20,6 @@ class JsonRawViewer extends StatefulWidget {
 }
 
 class _JsonRawViewerState extends State<JsonRawViewer> {
-  String? _rawContent;
   String? _formattedContent;
   bool _isLoading = true;
   String? _error;
@@ -64,13 +63,11 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
         final prettyJson = const JsonEncoder.withIndent('  ').convert(jsonData);
 
         setState(() {
-          _rawContent = rawContent;
           _formattedContent = prettyJson;
           _isLoading = false;
         });
       } catch (e) {
         setState(() {
-          _rawContent = rawContent;
           _formattedContent = rawContent;
           _isLoading = false;
         });
