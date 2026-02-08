@@ -1,6 +1,9 @@
-import 'package:blackbox_ui/run_picker_checker/run_check_service.dart';
+import 'package:blackbox_ui/pages/run_picker_screen.dart';
 import 'package:blackbox_ui/states/home_mode.dart';
+import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import 'main_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,11 +13,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  HomeMode _mode = HomeMode.runPicker;
+  HomeMode _mode = HomeMode.main;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.mainBackground,
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 250),
         transitionBuilder: (child, animation) =>
@@ -26,24 +30,11 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildContent() {
     return switch (_mode) {
-      HomeMode.main => Container(
+      HomeMode.main => MainScreen(
         key: ValueKey(_mode),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
       ),
-      HomeMode.runPicker => Container(
+      HomeMode.runPicker => RunPickerScreen(
         key: ValueKey(_mode),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: TextButton(
-            onPressed: () {
-              // TODO : Don't forget to put a path that exist
-              RunCheckService().checkRunFolder("");
-            },
-            child: Text("Test"),
-          ),
-        ),
       ),
     };
   }
