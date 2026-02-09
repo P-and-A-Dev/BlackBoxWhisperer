@@ -75,7 +75,7 @@ class _DragAndDropState extends State<DragAndDrop> {
                 _isExplorerOpened = true;
                 debugPrint("Open file picker");
                 Future.delayed(Duration(milliseconds: 100)).then(
-                  (value) {
+                      (value) {
                     setState(() {
                       alpha = 40;
                     });
@@ -84,10 +84,11 @@ class _DragAndDropState extends State<DragAndDrop> {
                 String? selectedDirectory = await FilePicker.platform
                     .getDirectoryPath();
 
+                _isExplorerOpened = false;
+
                 if (selectedDirectory != null) {
-                  print("Directory selected : $selectedDirectory");
-                } else {
-                  _isExplorerOpened = false;
+                  debugPrint("Directory selected: $selectedDirectory");
+                  widget.onFolderDropped?.call(selectedDirectory);
                 }
               }
             },
