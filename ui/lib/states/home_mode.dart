@@ -1,0 +1,4 @@
+enum HomeMode {
+  main,
+  runPicker,
+}

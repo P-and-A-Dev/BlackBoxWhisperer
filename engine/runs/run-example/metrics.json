@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "adapter": "cobol",
+  "generatedFrom": {
+    "callgraphArtifactId": "callgraph"
+  },
+  "programCount": 4,
+  "callCount": 0,
+  "nodeCount": 32,
+  "edgeCount": 27,
+  "externalCallCount": 0,
+  "performCount": 27,
+  "copybookCount": 1
+}
