@@ -43,6 +43,8 @@ dependencies:
   cross_file: ^0.3.5+2
   file_picker: ^10.3.10
   riverpod_annotation: ^4.0.2
+  google_generative_ai: ^0.4.7
+  shared_preferences: ^2.5.4
 
 dev_dependencies:
   flutter_test:
