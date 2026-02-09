@@ -1,17 +1,18 @@
+import 'package:blackbox_ui/states/loaded_run_provider.dart';
 import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:blackbox_ui/widgets/common/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TopBar extends StatefulWidget {
+import '../../utils/app_text_type.dart';
+
+class TopBar extends ConsumerWidget {
   const TopBar({super.key});
 
   @override
-  State<TopBar> createState() => _TopBarState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loadedRun = ref.watch(loadedRunProvider);
 
-class _TopBarState extends State<TopBar> {
-  @override
-  Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -26,11 +27,11 @@ class _TopBarState extends State<TopBar> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
-          crossAxisAlignment: .center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: .circular(10),
+                borderRadius: BorderRadius.circular(10),
                 color: AppColors.primary.withAlpha(25),
               ),
               child: Padding(
@@ -44,16 +45,39 @@ class _TopBarState extends State<TopBar> {
               ),
             ),
             SizedBox(width: 24),
-            AppText("Black Box Whisperer", type: .title, fontSize: 23),
-            SizedBox(width: 12),
-            AppText("/", type: .subTitle, fontSize: 23),
-            SizedBox(width: 12),
             AppText(
-              "Local Session",
-              type: .subTitle,
-              fontSize: 20,
-              fontWeight: .w400,
+              "Black Box Whisperer",
+              type: AppTextType.title,
+              fontSize: 23,
             ),
+            SizedBox(width: 12),
+            AppText("/", type: AppTextType.subTitle, fontSize: 23),
+            SizedBox(width: 12),
+            if (loadedRun != null) ...[
+              AppText(
+                loadedRun.manifest.adapter,
+                type: AppTextType.title,
+                fontSize: 20,
+                color: AppColors.primary,
+              ),
+              SizedBox(width: 12),
+              AppText("/", type: AppTextType.subTitle, fontSize: 23),
+              SizedBox(width: 12),
+              Flexible(
+                child: AppText(
+                  loadedRun.manifest.runId,
+                  type: AppTextType.subTitle,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ] else
+              AppText(
+                "No Run Loaded",
+                type: AppTextType.subTitle,
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+              ),
             Spacer(),
             IconButton(
               onPressed: () {},
