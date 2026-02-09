@@ -3,6 +3,7 @@ import 'package:blackbox_ui/states/loaded_run_provider.dart';
 import 'package:blackbox_ui/states/selected_artifact_provider.dart';
 import 'package:blackbox_ui/widgets/artifact_viewer/json_raw_viewer.dart';
 import 'package:blackbox_ui/widgets/artifact_viewer/markdown_artifact_viewer.dart';
+import 'package:blackbox_ui/widgets/gemini_insights_panel.dart';
 import 'package:blackbox_ui/widgets/main_screen/artifacts_side_panel.dart';
 import 'package:blackbox_ui/widgets/main_screen/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,22 @@ class MainScreen extends ConsumerStatefulWidget {
   ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends ConsumerState<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedArtifact = ref.watch(selectedArtifactProvider);
@@ -30,12 +46,37 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         child: Column(
           children: [
             const TopBar(),
+            Container(
+              color: const Color(0xFF1e2228),
+              child: TabBar(
+                controller: _tabController,
+                indicatorColor: Colors.purple,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white60,
+                tabs: const [
+                  Tab(
+                    icon: Icon(Icons.folder_open, size: 20),
+                    text: 'Artifacts',
+                  ),
+                  Tab(
+                    icon: Icon(Icons.psychology, size: 20),
+                    text: 'AI Insights',
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Row(
                 children: [
                   const ArtifactsSidePanel(),
                   Expanded(
-                    child: _buildArtifactViewer(selectedArtifact, loadedRun),
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        _buildArtifactViewer(selectedArtifact, loadedRun),
+                        const GeminiInsightsPanel(),
+                      ],
+                    ),
                   ),
                 ],
               ),

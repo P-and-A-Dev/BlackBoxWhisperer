@@ -1,3 +1,4 @@
+import 'package:blackbox_ui/pages/settings_page.dart';
 import 'package:blackbox_ui/states/loaded_run_provider.dart';
 import 'package:blackbox_ui/utils/app_colors.dart';
 import 'package:blackbox_ui/widgets/common/app_text.dart';
@@ -63,13 +64,11 @@ class TopBar extends ConsumerWidget {
               SizedBox(width: 12),
               AppText("/", type: AppTextType.subTitle, fontSize: 23),
               SizedBox(width: 12),
-              Flexible(
-                child: AppText(
-                  loadedRun.manifest.runId,
-                  type: AppTextType.subTitle,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+              AppText(
+                loadedRun.manifest.runId,
+                type: AppTextType.subTitle,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ] else
               AppText(
@@ -80,9 +79,16 @@ class TopBar extends ConsumerWidget {
               ),
             Spacer(),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                );
+              },
               icon: Icon(Icons.more_vert_rounded),
               color: Colors.white.withAlpha(125),
+              tooltip: 'Settings',
             ),
             SizedBox(width: 8),
             IconButton(
