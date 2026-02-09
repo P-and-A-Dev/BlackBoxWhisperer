@@ -24,6 +24,14 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
   bool _isLoading = true;
   String? _error;
 
+  // 🎨 Cores
+  static const _defaultColor = Color(0xFFc9d1d9);
+  static const _keyColor = Color(0xFFc586c0);
+  static const _stringColor = Color(0xFF7ee787);
+  static const _braceColor = Color(0xFFf2cc60);
+  static const _numberColor = Color(0xFFffa657);
+  static const _lineNumberColor = Color(0xFF6e7681);
+
   @override
   void initState() {
     super.initState();
@@ -60,13 +68,14 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
 
       try {
         final jsonData = jsonDecode(rawContent);
-        final prettyJson = const JsonEncoder.withIndent('  ').convert(jsonData);
+        final pretty =
+        const JsonEncoder.withIndent('  ').convert(jsonData);
 
         setState(() {
-          _formattedContent = prettyJson;
+          _formattedContent = pretty;
           _isLoading = false;
         });
-      } catch (e) {
+      } catch (_) {
         setState(() {
           _formattedContent = rawContent;
           _isLoading = false;
@@ -84,10 +93,7 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
     if (_formattedContent != null) {
       Clipboard.setData(ClipboardData(text: _formattedContent!));
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('JSON copied to clipboard'),
-          duration: Duration(seconds: 2),
-        ),
+        const SnackBar(content: Text('JSON copied')),
       );
     }
   }
@@ -100,9 +106,7 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
         children: [
           _buildHeader(),
           const Divider(height: 1, color: Colors.white12),
-          Expanded(
-            child: _buildContent(),
-          ),
+          Expanded(child: _buildContent()),
         ],
       ),
     );
@@ -126,7 +130,7 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
           ),
           const Spacer(),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: const Color(0xFF2a2f38),
               borderRadius: BorderRadius.circular(6),
@@ -141,26 +145,15 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
             ),
           ),
           const SizedBox(width: 12),
-          _buildActionButton(Icons.copy, 'Copy', _copyToClipboard),
-          const SizedBox(width: 8),
-          _buildActionButton(Icons.download, 'Download', () {
-            // TODO: Implement download
-          }),
+          InkWell(
+            onTap: _copyToClipboard,
+            borderRadius: BorderRadius.circular(6),
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(Icons.copy, size: 18, color: Colors.white60),
+            ),
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildActionButton(IconData icon, String tooltip, VoidCallback onTap) {
-    return Tooltip(
-      message: tooltip,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(6),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Icon(icon, size: 18, color: Colors.white60),
-        ),
       ),
     );
   }
@@ -174,18 +167,7 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
 
     if (_error != null) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
-            const SizedBox(height: 16),
-            Text(
-              _error!,
-              style: const TextStyle(color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+        child: Text(_error!, style: const TextStyle(color: Colors.red)),
       );
     }
 
@@ -193,7 +175,6 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
       width: double.infinity,
       height: double.infinity,
       color: const Color(0xFF0d1117),
-      padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -206,10 +187,19 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
   Widget _buildColoredJson(String json) {
     final spans = <TextSpan>[];
     final lines = json.split('\n');
+    final digits = lines.length.toString().length;
 
     for (var i = 0; i < lines.length; i++) {
-      final line = lines[i];
-      spans.addAll(_parseJsonLine(line));
+      final number = (i + 1).toString().padLeft(digits, ' ');
+      spans.add(
+        TextSpan(
+          text: '$number  ',
+          style: const TextStyle(color: _lineNumberColor),
+        ),
+      );
+
+      spans.addAll(_parseJsonLine(lines[i]));
+
       if (i < lines.length - 1) {
         spans.add(const TextSpan(text: '\n'));
       }
@@ -233,88 +223,83 @@ class _JsonRawViewerState extends State<JsonRawViewer> {
     final numberRegex = RegExp(r':\s*(-?\d+\.?\d*)');
     final boolNullRegex = RegExp(r':\s*(true|false|null)');
 
-    var currentIndex = 0;
-    final key = keyRegex.firstMatch(line);
+    final keyMatch = keyRegex.firstMatch(line);
 
-    if (key != null) {
-      if (key.start > 0) {
+    if (keyMatch != null) {
+      spans.addAll(_colorChars(line.substring(0, keyMatch.start)));
+
+      spans.add(
+        TextSpan(
+          text: '"${keyMatch.group(1)}"',
+          style: const TextStyle(color: _keyColor),
+        ),
+      );
+
+      spans.add(
+        const TextSpan(text: ': ', style: TextStyle(color: _defaultColor)),
+      );
+
+      final remaining = line.substring(keyMatch.end);
+
+      if (stringValueRegex.hasMatch(': $remaining')) {
+        final m = stringValueRegex.firstMatch(': $remaining')!;
         spans.add(
           TextSpan(
-            text: line.substring(0, key.start),
-            style: const TextStyle(color: Color(0xFFc9d1d9)),
+            text: '"${m.group(1)}"',
+            style: const TextStyle(color: _stringColor),
+          ),
+        );
+      } else if (numberRegex.hasMatch(': $remaining')) {
+        final m = numberRegex.firstMatch(': $remaining')!;
+        spans.add(
+          TextSpan(
+            text: m.group(1)!,
+            style: const TextStyle(color: _numberColor),
+          ),
+        );
+      } else if (boolNullRegex.hasMatch(': $remaining')) {
+        final m = boolNullRegex.firstMatch(': $remaining')!;
+        spans.add(
+          TextSpan(
+            text: m.group(1)!,
+            style: const TextStyle(color: _numberColor),
           ),
         );
       }
 
-      spans.add(
-        TextSpan(
-          text: '"${key.group(1)}"',
-          style: const TextStyle(color: Color(0xFF79c0ff)),
+      spans.addAll(_colorChars(
+        remaining.replaceFirst(
+          RegExp(r'^.*?"[^"]*"|^.*?\d+|^.*?(true|false|null)'),
+          '',
         ),
-      );
-
-      currentIndex = key.end - 1;
-      spans.add(
-        TextSpan(
-          text: ':',
-          style: const TextStyle(color: Color(0xFFc9d1d9)),
-        ),
-      );
-
-      final remaining = line.substring(currentIndex + 1);
-
-      if (stringValueRegex.hasMatch(remaining)) {
-        final value = stringValueRegex.firstMatch(remaining);
-        if (value != null) {
-          spans.add(
-            TextSpan(
-              text: ' "${value.group(1)}"',
-              style: const TextStyle(color: Color(0xFF7ee787)),
-            ),
-          );
-          currentIndex = line.length - remaining.length + value.end;
-        }
-      } else if (numberRegex.hasMatch(remaining)) {
-        final value = numberRegex.firstMatch(remaining);
-        if (value != null) {
-          spans.add(
-            TextSpan(
-              text: ' ${value.group(1)}',
-              style: const TextStyle(color: Color(0xFFffa657)),
-            ),
-          );
-          currentIndex = line.length - remaining.length + value.end;
-        }
-      } else if (boolNullRegex.hasMatch(remaining)) {
-        final value = boolNullRegex.firstMatch(remaining);
-        if (value != null) {
-          spans.add(
-            TextSpan(
-              text: ' ${value.group(1)}',
-              style: const TextStyle(color: Color(0xFFffa657)),
-            ),
-          );
-          currentIndex = line.length - remaining.length + value.end;
-        }
-      }
-
-      if (currentIndex < line.length) {
-        spans.add(
-          TextSpan(
-            text: line.substring(currentIndex),
-            style: const TextStyle(color: Color(0xFFc9d1d9)),
-          ),
-        );
-      }
+      ));
     } else {
-      spans.add(
-        TextSpan(
-          text: line,
-          style: const TextStyle(color: Color(0xFFc9d1d9)),
-        ),
-      );
+      spans.addAll(_colorChars(line));
     }
 
     return spans;
+  }
+
+  List<TextSpan> _colorChars(String text) {
+    return text.characters.map((char) {
+      if ('{}[]'.contains(char)) {
+        return TextSpan(
+          text: char,
+          style: const TextStyle(color: _braceColor),
+        );
+      }
+
+      if (char == '"') {
+        return TextSpan(
+          text: char,
+          style: const TextStyle(color: _stringColor),
+        );
+      }
+
+      return TextSpan(
+        text: char,
+        style: const TextStyle(color: _defaultColor),
+      );
+    }).toList();
   }
 }
